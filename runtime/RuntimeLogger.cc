@@ -33,8 +33,12 @@ namespace NanoLogInternal {
 // Define the static members of RuntimeLogger here
 __thread RuntimeLogger::StagingBuffer *RuntimeLogger::stagingBuffer = nullptr;
 thread_local RuntimeLogger::StagingBufferDestroyer RuntimeLogger::sbc;
-RuntimeLogger RuntimeLogger::nanoLogSingleton;
 
+RuntimeLogger& RuntimeLogger::instance()
+{
+    static RuntimeLogger gNanoLogSingleton;
+    return gNanoLogSingleton;
+}
 // RuntimeLogger constructor
 RuntimeLogger::RuntimeLogger()
         : threadBuffers()

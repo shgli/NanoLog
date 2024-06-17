@@ -42,6 +42,7 @@ using namespace NanoLog;
  * uncompressed log messages and manage a background thread to compress the
  * log messages to an output file.
  */
+    #define nanoLogSingleton RuntimeLogger::instance()
     class RuntimeLogger {
     public:
 
@@ -136,6 +137,8 @@ using namespace NanoLog;
         static inline int getCoreIdOfBackgroundThread() {
             return nanoLogSingleton.coreId;
         }
+
+       static RuntimeLogger& instance( void );
     PRIVATE:
 
         // Forward Declarations
@@ -151,7 +154,6 @@ using namespace NanoLog;
 
         // Singleton RuntimeLogger that manages the thread-local structures and
         // background output thread.
-        static RuntimeLogger nanoLogSingleton;
 
         RuntimeLogger();
 
